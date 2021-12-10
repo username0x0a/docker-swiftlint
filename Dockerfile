@@ -3,8 +3,8 @@
 # - `swift:latest` does not use `ubuntu:latest`
 # - SwiftLint binary has been compiled on Bionic
 
-ARG SWIFT_VERSION=5.5.0
-ARG SWIFTLINT_VERSION=0.45.0
+ARG SWIFT_VERSION=5.5.1
+ARG SWIFTLINT_VERSION=0.45.1
 
 ARG BUILDER_IMAGE=swift:${SWIFT_VERSION}-bionic
 ARG RUNTIME_IMAGE=ubuntu:bionic
