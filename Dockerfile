@@ -1,10 +1,10 @@
 
-# Explicitly specify `bionic` because:
+# Explicitly specify `focal` because:
 # - `swift:latest` does not use `ubuntu:latest`
-# - SwiftLint binary has been compiled on Bionic
+# - SwiftLint binary has been compiled on Focal
 
-ARG SWIFT_VERSION=5.5.3
-ARG SWIFTLINT_VERSION=0.46.3
+ARG SWIFT_VERSION=5.6.0
+ARG SWIFTLINT_VERSION=0.47.0
 
 ARG BUILDER_IMAGE=swift:${SWIFT_VERSION}-focal
 ARG RUNTIME_IMAGE=ubuntu:focal
@@ -32,6 +32,7 @@ RUN wget https://github.com/realm/SwiftLint/releases/download/$SWIFTLINT_VERSION
 RUN strip --strip-all /usr/lib/libsourcekitdInProc.so \
                       /usr/lib/swift/linux/libBlocksRuntime.so \
                       /usr/lib/swift/linux/libdispatch.so \
+                      /usr/lib/swift/linux/lib_InternalSwiftSyntaxParser.so \
                       /usr/bin/swiftlint
 
 # CMD ["bash"]
@@ -53,6 +54,7 @@ WORKDIR /lintdir
 COPY --from=builder /usr/lib/libsourcekitdInProc.so /usr/lib
 COPY --from=builder /usr/lib/swift/linux/libBlocksRuntime.so /usr/lib
 COPY --from=builder /usr/lib/swift/linux/libdispatch.so /usr/lib
+COPY --from=builder /usr/lib/swift/linux/lib_InternalSwiftSyntaxParser.so /usr/lib
 COPY --from=builder /usr/bin/swiftlint /usr/bin
 
 RUN swiftlint --version

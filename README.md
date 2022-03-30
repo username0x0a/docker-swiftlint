@@ -19,7 +19,8 @@ Full tags list is available [here](https://hub.docker.com/r/username0x0a/swiftli
 
 | SwiftLint + Swift version | Version tag          | Compatible Xcode         | Xcode tag    | Latest   |
 |---------------------------|----------------------|--------------------------|--------------|----------|
-| `0.46.3` + `5.5.3`        | `0.46.3_swift-5.5.3` | Xcode 13.2 / Swift 5.5   | `xcode-13.2` | `latest` |
+| `0.47.0` + `5.6.0`        | `0.47.0_swift-5.6.0` | Xcode 13.3 / Swift 5.6   | `xcode-13.3` | `latest` |
+| `0.46.3` + `5.5.3`        | `0.46.3_swift-5.5.3` | Xcode 13.2 / Swift 5.5   | `xcode-13.2` |          |
 | `0.46.1` + `5.5.2`        | `0.46.1_swift-5.5.2` | Xcode 13.2 / Swift 5.5   |              |          |
 | `0.45.1` + `5.5.2`        | `0.45.1_swift-5.5.2` | Xcode 13.2 / Swift 5.5   |              |          |
 | `0.45.1` + `5.5.1`        | `0.45.1_swift-5.5.1` | Xcode 13.2 / Swift 5.5   |              |          |
