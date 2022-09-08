@@ -3,8 +3,8 @@
 # - `swift:latest` does not use `ubuntu:latest`
 # - SwiftLint binary has been compiled on Focal
 
-ARG SWIFT_VERSION=5.6.1
-ARG SWIFTLINT_VERSION=0.47.1
+ARG SWIFT_VERSION=5.6.2
+ARG SWIFTLINT_VERSION=0.48.0
 
 ARG BUILDER_IMAGE=swift:${SWIFT_VERSION}-focal
 ARG RUNTIME_IMAGE=ubuntu:focal
