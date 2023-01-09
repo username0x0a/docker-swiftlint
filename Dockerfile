@@ -1,13 +1,15 @@
 
-# Explicitly specify `focal` because:
-# - `swift:latest` does not use `ubuntu:latest`
-# - SwiftLint binary has been compiled on Focal
+# Explicitly specify `jammy` because:
+# - SwiftLint release binary has been compiled on `swift:latest`
+# - `swift:latest` by that time was `jammy`
 
-ARG SWIFT_VERSION=5.6.2
-ARG SWIFTLINT_VERSION=0.49.1
+ARG UBUNTU_RELEASE=jammy
 
-ARG BUILDER_IMAGE=swift:${SWIFT_VERSION}-focal
-ARG RUNTIME_IMAGE=ubuntu:focal
+ARG SWIFT_VERSION=5.7.2
+ARG SWIFTLINT_VERSION=0.50.3
+
+ARG BUILDER_IMAGE=swift:${SWIFT_VERSION}-${UBUNTU_RELEASE}
+ARG RUNTIME_IMAGE=ubuntu:${UBUNTU_RELEASE}
 
 #####################
 # Builder image
@@ -32,6 +34,7 @@ RUN wget https://github.com/realm/SwiftLint/releases/download/$SWIFTLINT_VERSION
 RUN strip --strip-all /usr/lib/libsourcekitdInProc.so \
                       /usr/lib/swift/linux/libBlocksRuntime.so \
                       /usr/lib/swift/linux/libdispatch.so \
+                      /usr/lib/swift/linux/libswiftCore.so \
                       /usr/lib/swift/linux/lib_InternalSwiftSyntaxParser.so \
                       /usr/bin/swiftlint
 
@@ -54,6 +57,7 @@ WORKDIR /lintdir
 COPY --from=builder /usr/lib/libsourcekitdInProc.so /usr/lib
 COPY --from=builder /usr/lib/swift/linux/libBlocksRuntime.so /usr/lib
 COPY --from=builder /usr/lib/swift/linux/libdispatch.so /usr/lib
+COPY --from=builder /usr/lib/swift/linux/libswiftCore.so /usr/lib
 COPY --from=builder /usr/lib/swift/linux/lib_InternalSwiftSyntaxParser.so /usr/lib
 COPY --from=builder /usr/bin/swiftlint /usr/bin
 
