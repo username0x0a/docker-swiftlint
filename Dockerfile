@@ -5,8 +5,8 @@
 
 ARG UBUNTU_RELEASE=jammy
 
-ARG SWIFT_VERSION=5.7.2
-ARG SWIFTLINT_VERSION=0.50.3
+ARG SWIFT_VERSION=5.8.0
+ARG SWIFTLINT_VERSION=0.51.0
 
 ARG BUILDER_IMAGE=swift:${SWIFT_VERSION}-${UBUNTU_RELEASE}
 ARG RUNTIME_IMAGE=ubuntu:${UBUNTU_RELEASE}
@@ -35,7 +35,6 @@ RUN strip --strip-all /usr/lib/libsourcekitdInProc.so \
                       /usr/lib/swift/linux/libBlocksRuntime.so \
                       /usr/lib/swift/linux/libdispatch.so \
                       /usr/lib/swift/linux/libswiftCore.so \
-                      /usr/lib/swift/linux/lib_InternalSwiftSyntaxParser.so \
                       /usr/bin/swiftlint
 
 # CMD ["bash"]
@@ -58,9 +57,8 @@ COPY --from=builder /usr/lib/libsourcekitdInProc.so /usr/lib
 COPY --from=builder /usr/lib/swift/linux/libBlocksRuntime.so /usr/lib
 COPY --from=builder /usr/lib/swift/linux/libdispatch.so /usr/lib
 COPY --from=builder /usr/lib/swift/linux/libswiftCore.so /usr/lib
-COPY --from=builder /usr/lib/swift/linux/lib_InternalSwiftSyntaxParser.so /usr/lib
 COPY --from=builder /usr/bin/swiftlint /usr/bin
 
-RUN swiftlint --version
+RUN swiftlint version
 
 CMD ["swiftlint", "lint"]
